@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "slackclient"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "U.N. Owen", email = "void@some.where" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+    "pydantic>=2.10.6",
+    "requests>=2.32.3",
+]
+
+[project.urls]
+Documentation = "https://github.com/U.N. Owen/slackclient#readme"
+Issues = "https://github.com/U.N. Owen/slackclient/issues"
+Source = "https://github.com/U.N. Owen/slackclient"
+
+[tool.hatch.version]
+path = "src/slackclient/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/slackclient tests}"
+
+[tool.coverage.run]
+source_pkgs = ["slackclient", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/slackclient/__about__.py",
+]
+
+[tool.coverage.paths]
+slackclient = ["src/slackclient", "*/slackclient/src/slackclient"]
+tests = ["tests", "*/slackclient/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
